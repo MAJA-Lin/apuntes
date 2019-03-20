@@ -12,7 +12,7 @@ Bitbucket, AWS EC2 (Ubuntu), Laravel project (with dotenv file)
 ## 60 seconds
 
 
-#### 簡單暴力解 ####
+#### 簡單暴力解 (bitbucket pipelines & ssh command)
 
 我們需要某種方法, 能讓Bitbucket接收到push的時候, 命令AWS EC2 server自動去執行git pull
 (在這個範例是git fetch + git reset), 這樣子便達到了最簡單的自動佈署了!
@@ -49,7 +49,7 @@ $ ssh user@your_host "cd /your/project/path && git fetch - all && git reset - ha
 
 ---
 
-#### 不使用第三方版控工具
+#### 不使用第三方版控工具 (git bare repository & worktree on deployment server)
 
 如果是要直接將最新的程式推上目標伺服器的話, 也可以使用 *git bare repository*,
 配合git hook一樣能達到簡單的自動佈署 (原文請參照[這篇][ref#gist-simple-automated-git-deployment])
@@ -107,18 +107,35 @@ git hook會將這個裸倉庫worktree的資料夾內的程式, 強制指到最�
 ## 60 minutes
 
 
-##### Bitbucket branch workflow
+#### 開發Bitbucket pipelines 遇到的問題
+
+
+- Branch workflow
 
 ![Bitbucket branch workflow][img#03]
 
-在[pipelines][ref#branch-workflows]裡, 可以針對各個commit / branch設定不同的工作
-需要注意的是, 執行符合條件的branch的腳本以後, 就沒辦法回去執行default裡的指令了!
+在[pipelines][ref#branch-workflows]裡, 可以針對各個commit / branch設定不同的工作.
 
+需要注意的是, 此處的default/branch是類似if-else條件, 也就是說符合branch條件以後是不會去執行default的內容的.
+
+- Parallel steps
+
+Pipelines可以並行處理腳本, 不過有最多同時執行10筆的上限.
+
+另外, 產生檔案發生衝突時會以最後一個parallel step為準.
+
+[詳細資訊][ref#pipelines parallel steps]
+
+
+
+#### CD with git bare repository and git hook
+
+[洛桑扎巴 - 使用 Git Hooks 实现自动项目部署 (http://notes.11ten.net/apps-auto-deploy-with-git.html)][ref#use git hooks for CD]
 
 
 ---
 
-### References ###
+## References ##
 
 [ref#bitbucket-ip-list]: https://confluence.atlassian.com/bitbucket/what-are-the-bitbucket-cloud-ip-addresses-i-should-use-to-configure-my-corporate-firewall-343343385.html "What are the Bitbucket Cloud IP addresses I should use to configure my corporate firewall?"
 
@@ -132,19 +149,20 @@ git hook會將這個裸倉庫worktree的資料夾內的程式, 強制指到最�
 
 [ref#branch-workflows]: https://confluence.atlassian.com/bitbucket/branch-workflows-856697482.html "pipelines branch workflow"
 
+[ref#pipelines parallel steps]: https://confluence.atlassian.com/bitbucket/parallel-steps-946606807.html
+
+[ref#use git hooks for CD]: http://notes.11ten.net/apps-auto-deploy-with-git.html "洛桑扎巴 - 使用 Git Hooks 实现自动项目部署"
+
 [img#01]: /public/images/2019-march/d77a8aee8ccba2c72ae554233be02dd55ca97262e6a1abeae6ba9166aba5880c.png "Bitbucket ssh settings"
 
 [img#02]: /public/images/2019-march/04d1143f49a7d8920120e93ba7848304b4d1430dcbcd5a5e30e91c53fbbedc84.png "AWS Security group"
 
 [img#03]: /public/images/2019-march/b6a7c6a59e99f93dc619db7e940c51df219a2126ac52e3bd07c888fb557b9987.gif "Bitbucket pipeline branch workflow"
 
+#### 其他參考資料
 
-https://confluence.atlassian.com/bitbucket/build-test-and-deploy-with-pipelines-792496469.html
+[Bitbucket Support - Build, test, and deploy with Pipelines](https://confluence.atlassian.com/bitbucket/build-test-and-deploy-with-pipelines-792496469.html)
 
-https://confluence.atlassian.com/bitbucket/bitbucket-deployments-940695276.html
+[Bitbucket Support - Bitbucket Deployments](https://confluence.atlassian.com/bitbucket/bitbucket-deployments-940695276.html)
 
-https://confluence.atlassian.com/bitbucket/run-pipelines-manually-861242583.html
-
-https://confluence.atlassian.com/bitbucket/parallel-steps-946606807.html
-
-https://stackoverflow.com/questions/5083224/git-pull-while-not-in-a-git-directory
+[Bitbucket Support - Run pipelines manually](https://confluence.atlassian.com/bitbucket/run-pipelines-manually-861242583.html)
