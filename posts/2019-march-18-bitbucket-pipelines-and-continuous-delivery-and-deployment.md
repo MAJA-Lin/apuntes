@@ -6,6 +6,7 @@
 Bitbucket, AWS EC2 (Ubuntu), Laravel project (with dotenv file)
 
 我們的程式佈署在EC2上, 可是每次做完pull request, 還要自己手動連進機器裡面佈署最新的程式碼.
+
 手動佈署的工作實在太過無趣, 是不是能用什麼工具來節省寶貴的時間呢?
 
 ---
@@ -52,7 +53,8 @@ $ ssh user@your_host "cd /your/project/path && git fetch - all && git reset - ha
 
 #### 不使用第三方版控工具 (git bare repository & worktree on deployment server)
 
-如果是要直接將最新的程式推上目標伺服器的話, 也可以使用 *git bare repository*,
+如果是要直接將最新的程式推上目標伺服器的話, 也可以使用 **git bare repository**,
+
 配合git hook一樣能達到簡單的自動佈署 (原文請參照[這篇][ref#gist-simple-automated-git-deployment])
 
 
@@ -98,9 +100,12 @@ $ git remote add production demo@yourserver.com:project.git
 
 最後, push讓伺服器觸發deploy的**git hook**即可
 
-這個方法是建立一個[裸倉庫(bare repository)][ref#git-bare-repository], 並指定它的[worktree][ref#git-worktree]. 當本地端的使用者推送資料到伺服器的時候,
-git hook會將這個裸倉庫worktree的資料夾內的程式, 強制指到最新的版本
-所以如果有編譯/安裝相依套件的需求時, 記得要加上執行相關動作的指令
+這個方法是建立一個[裸倉庫(bare repository)][ref#git-bare-repository], 並指定它的[worktree][ref#git-worktree].
+
+當本地端的使用者推送資料到伺服器的時候,
+git hook會將這個裸倉庫worktree的資料夾內的程式, 強制指到最新的版本.
+
+所以如果有編譯/安裝相依套件的需求時, 記得要加上執行相關動作的指令.
 
 
 
@@ -137,7 +142,7 @@ Pipelines可以並行處理腳本, 不過有最多同時執行10筆的上限.
 
 
 
-其實一開始我的作法是
+其實一開始我的作法如下圖所示
 
 ![original flow][img#04]
 
@@ -146,7 +151,7 @@ Pipelines可以並行處理腳本, 不過有最多同時執行10筆的上限.
 
 不過會遇到git hook沒辦法認得deployment資料夾git 狀態的問題.
 
-這一篇文章的作法有提到使用
+這一篇文章的作法有提到使用:
 
 ```shell
 env -i git pull
