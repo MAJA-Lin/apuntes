@@ -1,4 +1,4 @@
-# Bitbucket Pipelines與Continuous Delivery / Deployment
+# 使用Bitbucket Pipelines 來實做Continuous Delivery / Deployment
 
 ##### Date: 2019/March/18
 
