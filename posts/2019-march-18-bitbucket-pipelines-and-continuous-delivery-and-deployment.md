@@ -1,5 +1,6 @@
 # Bitbucket Pipelines與Continuous Delivery / Deployment
 
+##### Date: 2019/March/18
 
 環境 & 背景介紹: 
 Bitbucket, AWS EC2 (Ubuntu), Laravel project (with dotenv file)
