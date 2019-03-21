@@ -21,7 +21,7 @@ Bitbucket, AWS EC2 (Ubuntu), Laravel project (with dotenv file)
 (保留dot env檔案不進版控, 套件/需要編譯的檔案做最低限度的安裝/更新)
 
 
-
+<br>
 Step 1. Set SSH keys & Known hosts
 
 
@@ -30,6 +30,7 @@ Step 1. Set SSH keys & Known hosts
 設定SSH 鑰匙資訊 - Settings > [SSH keys][ref#bitbucket-use-ssh-in-pipelines] > 將公鑰私鑰填入適當的位置, 並把server address加進
 Known hosts裡面.
 
+<br>
 Step 2.
 
 ![Step 2. Set AWS security group][img#02]
@@ -37,6 +38,7 @@ Step 2.
 通常AWS EC2上會設定security group, 我們會需要將[Bitbucket IP list][ref#bitbucket-ip-list]加入清單當中(用以辨認來自Bitbucket的SSH請求)
 
 
+<br>
 Step 3.
 在**bitbucket-pipelines.yml**裡, 要執行CD的地方加上這行
 
@@ -45,14 +47,17 @@ $ ssh user@your_host "cd /your/project/path && git fetch - all && git reset - ha
 ```
 
 它會自動到你要佈署的資料夾裡做類似 **git force pull** 的動作, 這樣便達到了自動佈署的目的.
+
 當然, 如果有安裝/更新相依性套件的需求, 也能直接加在上面ssh的指令裡, 或是透過 *git hook* 觸發
 
 
+<br>
 
 ---
 
 #### 不使用第三方版控工具 (git bare repository & worktree on deployment server)
 
+<br>
 如果是要直接將最新的程式推上目標伺服器的話, 也可以使用 **git bare repository**,
 
 配合git hook一樣能達到簡單的自動佈署 (原文請參照[這篇][ref#gist-simple-automated-git-deployment])
@@ -61,7 +66,6 @@ $ ssh user@your_host "cd /your/project/path && git fetch - all && git reset - ha
 首先我們先在要佈署的伺服器建立**兩個**資料夾, 一個是*deploy-folder*, 另一個則是*bare-repository-folder*
 
 ```shell
-
 $ mkdir ~/deploy-folder
 $ git init --bare ~/project.git
 ```
@@ -69,7 +73,6 @@ $ git init --bare ~/project.git
 再來是設定**git hook**, 這裡我們使用的是**post-receive**
 
 ```shell
-
 #!/bin/bash
 TARGET="/home/webuser/deploy-folder"
 GIT_DIR="/home/webuser/project.git"
@@ -93,12 +96,13 @@ done
 接著在你自己的本地端加上要佈署目標的資訊
 
 ```shell
-
 $ cd ~/path/to/working-copy/
 $ git remote add production demo@yourserver.com:project.git
 ```
 
-最後, push讓伺服器觸發deploy的**git hook**即可
+最後, push讓伺服器觸發deploy的**git hook**即可.
+
+<br>
 
 這個方法是建立一個[裸倉庫(bare repository)][ref#git-bare-repository], 並指定它的[worktree][ref#git-worktree].
 
@@ -108,7 +112,7 @@ git hook會將這個裸倉庫worktree的資料夾內的程式, 強制指到最�
 所以如果有編譯/安裝相依套件的需求時, 記得要加上執行相關動作的指令.
 
 
-
+<br>
 
 ## 60 minutes
 
@@ -124,6 +128,8 @@ git hook會將這個裸倉庫worktree的資料夾內的程式, 強制指到最�
 
 需要注意的是, 此處的default/branch是類似if-else條件, 也就是說符合branch條件以後是不會去執行default的內容的.
 
+<br>
+
 - Parallel steps
 
 Pipelines可以並行處理腳本, 不過有最多同時執行10筆的上限.
@@ -132,7 +138,7 @@ Pipelines可以並行處理腳本, 不過有最多同時執行10筆的上限.
 
 [詳細資訊][ref#pipelines parallel steps]
 
-
+<br>
 
 #### CD with git bare repository and git hook
 
@@ -141,6 +147,7 @@ Pipelines可以並行處理腳本, 不過有最多同時執行10筆的上限.
 [gist - icyleaf/post-receive.sh][ref#post-receive-to-pull]
 
 
+<br>
 
 其實一開始我的作法如下圖所示
 
@@ -164,6 +171,8 @@ git pulll
 ```
 
 或許可以解決這個問題.
+
+<br>
 
 參考: [Why is it better to use “#!/usr/bin/env NAME” instead of “#!/path/to/NAME” as my shebang?][ref#why env -i git pull]
 
