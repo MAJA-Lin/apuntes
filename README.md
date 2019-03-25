@@ -17,6 +17,6 @@ Trying to find a **60 sec** / **60 min** solution.
 
 ### References
 
-[article#2019-march-18]: /posts/2019-march-18-bitbucket-pipelines-and-continuous-delivery-and-deployment.md
+[article#2019-march-18]: /src/posts/2019-march-18-bitbucket-pipelines-and-continuous-delivery-and-deployment.md
 
-[article#2019-march-21]: /posts/2019-march-21-docker-introduction.md
+[article#2019-march-21]: /src/posts/2019-march-21-docker-introduction.md
