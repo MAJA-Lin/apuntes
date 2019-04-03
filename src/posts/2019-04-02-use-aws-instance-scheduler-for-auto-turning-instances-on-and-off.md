@@ -13,7 +13,9 @@ AWS機器上的花費是相當高的, 當專案仍處在開發階段的時候, �
 
 ## 60 seconds
 
-#### AWS幫你準備好了
+### AWS幫你準備好了
+
+<br>
 
 - 架構
 
@@ -23,16 +25,17 @@ AWS機器上的花費是相當高的, 當專案仍處在開發階段的時候, �
 
 <br>
 
-用**AWS CloudWatch Events** (以時間為條件, 類似cronjob, 這邊用來調整觸發**頻率**) 觸發**Lambda**程式 (AWS寫好了, 基於python),
+>用**AWS CloudWatch Events** (以時間為條件, 類似cronjob, 這邊用來調整觸發**頻率**) 觸發**Lambda**程式 (AWS寫好了, 基於python),
+>
+>去檢查目標的執行狀態, 再按照**DynamoDB**裡設定的細節執行開關機.
 
-去檢查目標的執行狀態, 再按照**DynamoDB**裡設定的細節執行開關機.
-
+<br>
 
 - 使用CloudFormation佈署基礎服務
 
 
 一樣是在剛剛的官方頁面, 可以看到 **Launch solution in the AWS Console**的按鈕,
-按下去以後就會進到CloudFormation的頁面, 並開始設定一些細節.
+按下去以後就會進到CloudFormation的頁面, 並開始設定細節.
 
 進不去該頁面的同學請先確認你的**IAM**裡有開啟CloudFormation的權限.
 
@@ -40,20 +43,21 @@ AWS機器上的花費是相當高的, 當專案仍處在開發階段的時候, �
 
 <br>
 
-當然, 你也可以用*View/Edit template in Designer*檢查接下來AWS會幫你開啟/創建哪些服務.
+當然, 你也可以用*View/Edit template in Designer*查看接下來AWS會幫你開啟/創建哪些服務.
 
 ![CloudFormation template][img#03]
 
 <br>
+
+
+下一頁會進到Options, 要特別注意權限的設定. 這邊也能設定排程出錯時的處置選項.
+之後就等待CloudFormation將整組服務建立起來.
 
 ![Parameters][img#04]
 
 ※註1: **Instance Scheduler tag name**是之後在EC2/RDS上指定哪些**資源**要套用*自動開關機*時會用到的, 這裡指定的是**key**
 
 <br>
-
-下一頁會進到Options, 要特別注意權限的設定. 這邊也能設定排程出錯時的處置選項.
-之後就等待CloudFormation將整組服務建立起來.
 
 - DynamoDB: 調整時間與排程
 
@@ -80,9 +84,11 @@ AWS機器上的花費是相當高的, 當專案仍處在開發階段的時候, �
 
 總之, 到這邊整個設定就完成了80%.
 
+<br>
+
 - 啟動排程開關機服務
 
-以EC2為例,
+這裡使用EC2u作為範例,
 
 ![EC2 Instances][img#08]
 
@@ -96,6 +102,8 @@ $(Instance Scheduler tag name):$(DanamoDB->ConfigTable->Items->schedule->name)
 
 右邊的值只能選擇當初DynamoDB裡面是排程(type = schedule)的資料,
 如果給的值是區間名稱(type = period)的話會報錯.
+
+![簡單來說就是這麼回事][img#09]
 
 
 ## 60 minutes
@@ -128,6 +136,8 @@ $(Instance Scheduler tag name):$(DanamoDB->ConfigTable->Items->schedule->name)
 
 [img#08]: /public/images/2019-april/925280d6c0935aad3a992ed66da8307882b8d38c30183c37f73fb28ce20deb80.png "EC2 page"
 
+[img#09]: /public/images/2019-april/ff9e608382107313f3400f7523d0a1f73d4c879c2e6826eef10dca792e0baa1f.png "Instance Scheduler on the AWS Cloud"
+
 [ref#instance-schedule-page]: https://aws.amazon.com/tw/solutions/instance-scheduler/ "AWS Instance Scheduler"
 
 [ref#01]: link "Link description"
@@ -137,6 +147,8 @@ $(Instance Scheduler tag name):$(DanamoDB->ConfigTable->Items->schedule->name)
 
 #### 其他參考資料
 
-Amazon. (2018, Feb. 7). [AWS Instance Scheduler 正式推出](https://aws.amazon.com/tw/about-aws/whats-new/2018/02/introducing-the-aws-instance-scheduler/) Amazon Web Service
+Amazon. (2018, Feb. 7). [AWS Instance Scheduler 正式推出](https://aws.amazon.com/tw/about-aws/whats-new/2018/02/introducing-the-aws-instance-scheduler/) Amazon Web Service.
 
-Dulare (20188, Feb. 20). [AWS Instance Scheduler – quick howto](https://handyman.dulare.com/aws-instance-scheduler-quick-howto/) IT HANDYMAN
+Dulare (20188, Feb. 20). [AWS Instance Scheduler – quick howto](https://handyman.dulare.com/aws-instance-scheduler-quick-howto/) IT HANDYMAN.
+
+Amazon, (2018, October). [AWS Instance Scheduler](https://docs.aws.amazon.com/solutions/latest/instance-scheduler/welcome.html) Amazon Web Service Documentation.
