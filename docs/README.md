@@ -23,12 +23,12 @@ Trying to find a **60 sec** / **60 min** solution.
 
 ### References
 
-[article#2019-march-18]: /src/posts/2019-march-18-bitbucket-pipelines-and-continuous-delivery-and-deployment.md
+[article#2019-march-18]: /posts/2019/2019-march-18-bitbucket-pipelines-and-continuous-delivery-and-deployment.md
 
-[article#2019-march-21]: /src/posts/2019-march-21-docker-introduction.md
+[article#2019-march-21]: /posts/2019/2019-march-21-docker-introduction.md
 
-[article#2019-march-25]: /src/posts/2019-march-25-github-pages-with-gandi-dns-configuration.md
+[article#2019-march-25]: /posts/2019/2019-march-25-github-pages-with-gandi-dns-configuration.md
 
-[article#2019-march-28]: /src/posts/2019-03-28-difference-between-pass-by-value-reference-name.md
+[article#2019-march-28]: /posts/2019/2019-march-28-difference-between-pass-by-value-reference-name.md
 
-[article#2019-april-02]: /src/posts/2019-04-02-use-aws-instance-scheduler-for-auto-turning-instances-on-and-off.md
+[article#2019-april-02]: /posts/2019/2019-april-02-use-aws-instance-scheduler-for-auto-turning-instances-on-and-off.md

@@ -8,6 +8,7 @@ AWS機器上的花費是相當高的, 當專案仍處在開發階段的時候, �
 
 <br>
 
+
 ---
 
 
@@ -120,23 +121,24 @@ $(Instance Scheduler tag name):$(DanamoDB->ConfigTable->Items->schedule->name)
 
 ## References
 
-[img#01]: /public/images/2019-april/cb70e1deb398f3ce74b74c793de1d7d1a2150f9a7dae33419f792a655bac253e.png "AWS Solution overview"
+[img#01]: /images/2019/april/cb70e1deb398f3ce74b74c793de1d7d1a2150f9a7dae33419f792a655bac253e.png "AWS Solution overview"
 
-[img#02]: /public/images/2019-april/48018e1af8c10f2731359f431c8d7213d9cb731dc7b93fad8217f16e82a03ac5.png "AWS自動填入了Scheduler的模板, 按下Next即可"
+[img#02]: /images/2019/april/48018e1af8c10f2731359f431c8d7213d9cb731dc7b93fad8217f16e82a03ac5.png "AWS自動填入了Scheduler的模板, 按下Next即可"
 
-[img#03]: /public/images/2019-april/9627a0853bd495f52df4837eda2b5fd07e12c83089dd3ab8aa091630719f03b6.png "CloudFormation template"
+[img#03]: /images/2019/april/9627a0853bd495f52df4837eda2b5fd07e12c83089dd3ab8aa091630719f03b6.png "CloudFormation template"
 
-[img#04]: /public/images/2019-april/2183c72c3c752ce3f4b7e1779bf829d065185f5ba93f3c9d1ea01b1e5818e70b.png "參數說明"
+[img#04]: /images/2019/april/2183c72c3c752ce3f4b7e1779bf829d065185f5ba93f3c9d1ea01b1e5818e70b.png "參數說明"
 
-[img#05]: /public/images/2019-april/6d604a1f57da63aafef62542d6427e8227e5282f2d1d17ca6b429697af137586.png "period"
+[img#05]: /images/2019/april/6d604a1f57da63aafef62542d6427e8227e5282f2d1d17ca6b429697af137586.png "period"
 
-[img#06]: /public/images/2019-april/93c74ea89a2ab4ab7650530a2960f84383918843369cbf21d6ee0b925719019d.png "schedule"
+[img#06]: /images/2019/april/6d604a1f57da63aafef62542d6427e8227e5282f2d1d17ca6b429697af137586.png "schedule"
 
-[img#07]: /public/images/2019-april/16a696b30864af42938ae92ec669f6e9d7012c4478bbb14c0a4b338de53bdb47.png "DynamoDB"
+[img#07]: /images/2019/april/16a696b30864af42938ae92ec669f6e9d7012c4478bbb14c0a4b338de53bdb47.png "DynamoDB"
 
-[img#08]: /public/images/2019-april/925280d6c0935aad3a992ed66da8307882b8d38c30183c37f73fb28ce20deb80.png "EC2 page"
+[img#08]: /images/2019/april/925280d6c0935aad3a992ed66da8307882b8d38c30183c37f73fb28ce20deb80.png "EC2 page"
 
-[img#09]: /public/images/2019-april/ff9e608382107313f3400f7523d0a1f73d4c879c2e6826eef10dca792e0baa1f.png "Instance Scheduler on the AWS Cloud"
+[img#09]: /images/2019/april/ff9e608382107313f3400f7523d0a1f73d4c879c2e6826eef10dca792e0baa1f.png "Instance Scheduler on the AWS Cloud"
+
 
 [ref#instance-schedule-page]: https://aws.amazon.com/tw/solutions/instance-scheduler/ "AWS Instance Scheduler"
 

@@ -35,7 +35,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 
 ## References
 
-[img#01]: /public/images/folder/file "Image description"
+[img#01]: /images/folder/file "Image description"
 
 [ref#01]: link "Link description"
 
