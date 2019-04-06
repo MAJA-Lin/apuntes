@@ -151,19 +151,19 @@
 
 ## References
 
-[img#01]: /public/images/2019-march/23579eb0296ec5ed2863d5243e033262ca1d819eb80f1e26d8fc6388149ede2d.png "dns-record-on-gandi"
+[img#01]: /images/2019/march/23579eb0296ec5ed2863d5243e033262ca1d819eb80f1e26d8fc6388149ede2d.png "dns-record-on-gandi"
 
-[img#02]: /public/images/2019-march/ac26fb38f709309473f87886486cc6a54c03ccd90c9f8e1c5a3aae4d600138cf.png "Repo actions settings"
+[img#02]: /images/2019/march/ac26fb38f709309473f87886486cc6a54c03ccd90c9f8e1c5a3aae4d600138cf.png "Repo actions settings"
 
-[img#03]: /public/images/2019-march/42f2577e0497d33ba8885398a57a3fbd9055b1dddb72fed6966bab0e1d7bf90c.png "enforce-https-checkbox"
+[img#03]: /images/2019/march/42f2577e0497d33ba8885398a57a3fbd9055b1dddb72fed6966bab0e1d7bf90c.png "enforce-https-checkbox"
 
-[img#04]: /public/images/2019-march/7e5e47280ad25ba92a50d687f483d86359fe0b03086240580830e8322c263fbb.png "supported-custom-domain-examples"
+[img#04]: /images/2019/march/7e5e47280ad25ba92a50d687f483d86359fe0b03086240580830e8322c263fbb.png "supported-custom-domain-examples"
 
-[img#05]: /public/images/2019-march/6b66546475caabaf392941e0715137fd4332f84bd4b756466ab201a05f4dc58c.png "Specify custom domain in GitHub settings"
+[img#05]: /images/2019/march/6b66546475caabaf392941e0715137fd4332f84bd4b756466ab201a05f4dc58c.png "Specify custom domain in GitHub settings"
 
-[img#06]: /public/images/2019-march/2e3806602fe0a107a28ea734a8196c24bc16f56b50c243a63962d9a0bfc1144f.png "Github settings after everything done."
+[img#06]: /images/2019/march/2e3806602fe0a107a28ea734a8196c24bc16f56b50c243a63962d9a0bfc1144f.png "Github settings after everything done."
 
-[img#07]: /public/images/2019-march/040ba4824faa2afd3fdf972b2b697489c9890c5db2f87dd1f1c9338caad5f7a3.png "Custom domain redirects for GitHub Pages sites"
+[img#07]: /images/2019/march/040ba4824faa2afd3fdf972b2b697489c9890c5db2f87dd1f1c9338caad5f7a3.png "Custom domain redirects for GitHub Pages sites"
 
 
 [ref#quick-start-custom-domain]: https://help.github.com/en/articles/quick-start-setting-up-a-custom-domain "Github help - quick start"

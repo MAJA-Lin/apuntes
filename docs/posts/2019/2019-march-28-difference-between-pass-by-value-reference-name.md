@@ -263,7 +263,7 @@ function main()
 
 ## References
 
-[img#01]: /public/images/folder/file "Image description"
+[img#01]: /images/folder/file "Image description"
 
 [ref#pass-by-name01]: http://www.cs.sfu.ca/~cameron/Teaching/383/PassByName.html "Pass-By-Name Parameter Passing by Robert D. Cameron"
 

@@ -1,0 +1,28 @@
+{
+  "name": "apuntes",
+  "version": "1.0.0",
+  "description": "A place to put my notes",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "vuepress": "^1.0.0-alpha.46"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MAJA-Lin/apuntes.git"
+  },
+  "keywords": [
+    "notes"
+  ],
+  "author": "Scott Lin",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/MAJA-Lin/apuntes/issues"
+  },
+  "homepage": "https://github.com/MAJA-Lin/apuntes#readme"
+}

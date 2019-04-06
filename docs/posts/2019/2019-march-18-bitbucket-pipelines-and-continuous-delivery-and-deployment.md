@@ -202,13 +202,13 @@ git pulll
 [ref#why env -i git pull]: https://unix.stackexchange.com/questions/29608/why-is-it-better-to-use-usr-bin-env-name-instead-of-path-to-name-as-my "Why is it better to use “#!/usr/bin/env NAME” instead of “#!/path/to/NAME” as my shebang?"
 
 
-[img#01]: /public/images/2019-march/d77a8aee8ccba2c72ae554233be02dd55ca97262e6a1abeae6ba9166aba5880c.png "Bitbucket ssh settings"
+[img#01]: /images/2019/march/d77a8aee8ccba2c72ae554233be02dd55ca97262e6a1abeae6ba9166aba5880c.png "Bitbucket ssh settings"
 
-[img#02]: /public/images/2019-march/04d1143f49a7d8920120e93ba7848304b4d1430dcbcd5a5e30e91c53fbbedc84.png "AWS Security group"
+[img#02]: /images/2019/march/04d1143f49a7d8920120e93ba7848304b4d1430dcbcd5a5e30e91c53fbbedc84.png "AWS Security group"
 
-[img#03]: /public/images/2019-march/b6a7c6a59e99f93dc619db7e940c51df219a2126ac52e3bd07c888fb557b9987.gif "Bitbucket pipeline branch workflow"
+[img#03]: /images/2019/march/b6a7c6a59e99f93dc619db7e940c51df219a2126ac52e3bd07c888fb557b9987.gif "Bitbucket pipeline branch workflow"
 
-[img#04]: /public/images/2019-march/2fddedba40b507de68983700b62e5ed19686ab808a6c8247d86aa01afca3f2f5.jpg "cd-with-bare-repository-git-hook.jpg"
+[img#04]: /images/2019/march/2fddedba40b507de68983700b62e5ed19686ab808a6c8247d86aa01afca3f2f5.jpg "cd-with-bare-repository-git-hook.jpg"
 
 #### 其他參考資料
 
