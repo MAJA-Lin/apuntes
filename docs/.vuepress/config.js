@@ -1,7 +1,7 @@
 module.exports = {
     title: 'Notes',
     description: 'Scott Lin\'s notes',
-    base: "/apuntes/",
+    // base: "/apuntes/",
     head: [
         ['link', {
             rel: 'icon',
