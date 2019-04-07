@@ -8,6 +8,8 @@ footer: MIT Licensed | Copyright © 2019-present Scott Lin
 
 ### Index
 
+[2019/April/07 - I/O Models][article#2019-april-07-io-models]
+
 [2019/April/02 - 利用AWS Instance Scheduler 達成EC2 & RDS 自動開/關機][article#2019-april-02]
 
 [2019/March/28 - 比較 Pass by Value / Reference / Name][article#2019-march-28]
@@ -32,3 +34,5 @@ footer: MIT Licensed | Copyright © 2019-present Scott Lin
 [article#2019-march-28]: /posts/2019/2019-march-28-difference-between-pass-by-value-reference-name.md
 
 [article#2019-april-02]: /posts/2019/2019-april-02-use-aws-instance-scheduler-for-auto-turning-instances-on-and-off.md
+
+[article#2019-april-07-io-models]: /posts/2019/2019-april-07-io-models.md
