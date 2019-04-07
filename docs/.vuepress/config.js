@@ -25,7 +25,16 @@ module.exports = {
     ],
 
     markdown: {
-        lineNumbers: true
+        lineNumbers: true,
+        extendMarkdown: md => {
+            md.set({ breaks: true })
+            md.use(require('markdown-it-abbr'))
+            // md.use(require('markdown-it-mark'))
+            // md.use(require('markdown-it-underline'))
+            // md.use(require('markdown-it-checkbox'))
+            // md.use(require('markdown-it-imsize'))
+            // md.use(require('markdown-it-math'))
+        }
     },
 
 
