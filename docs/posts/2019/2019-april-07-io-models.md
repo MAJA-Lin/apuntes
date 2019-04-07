@@ -18,7 +18,14 @@ tags: [Unix, IO]
 
 ## 60 seconds
 
-#### Subtitle#1
+### Operating System Concepts
+
+
+
+<br>
+
+![Operating System Concepts 10e - 3.6.2 Synchronization][img#01]
+
 
 
 <br>
@@ -39,9 +46,9 @@ an input operation:
 >
 >2. Copying the data from the kernel to the process
 
-IO發生時通常會有兩個階段, **等待資料準備好** 及 **將資料從核心(kernel)中複製到行程中(process)**.
+IO發生時通常會有兩個階段, **等待資料準備好** 及 **將資料從 核心 中複製到 行程 中**.
 
-以socket上的IO來說, 第一步是等待資料抵達; 當封包抵達以後, 把它複製到核心裡的緩衝區(kernel buffer).
+以socket上的IO來說, 第一步是等待資料抵達; 當封包抵達以後, 把它複製到 核心 裡的緩衝區(kernel buffer).
 第二步才是再把資料從核心緩衝區複製到應用程式的緩衝區裡.
 
 因為這兩階段中的不同情況, 於是有了下列的5種I/O模型:
@@ -64,8 +71,8 @@ come into play.
 相較於TCP, UDP在 **資料準備好被讀取**的概念比較簡單, 只要考慮資料接受與否即可;
 TCP比較複雜, 還會牽扯到一些額外的變數等等.
 
-在表中,可以看到這個行程呼叫了 **recvfrom** 並執行了系統呼叫 (system call);
-可是一直到資料傳送跟複製資料到緩衝區的動作完成之前, 或是錯誤發生, kernel才會回傳結果,
+在表中,可以看到這個行程呼叫了 **recvfrom** 並執行了系統呼叫 ;
+可是一直到資料傳送跟複製資料到緩衝區的動作完成之前, 或是錯誤發生, 內核 才會回傳結果,
 這個行程才會解除阻塞狀態, 繼續運行下去.
 
 > We say that our process is blocked the entire time from when it calls recvfrom until it
@@ -73,13 +80,35 @@ returns.
 >
 >When recvfrom returns successfully, our application processes the datagram.
 
-整個行程在 **recvfrom**回傳成功之前都是阻塞的狀態, 只有**recvfrom**回傳成功, 應用程式才會繼續處理資料.
+整個 行程 在 **recvfrom**回傳成功之前都是阻塞的狀態, 只有**recvfrom**回傳成功, 應用程式才會繼續處理資料.
 
 <br>
 
-- Nonblocking I/O
+- Nonblocking I/O 非阻塞IO
 
 ![non-blocking][img#03]
+
+>When we set a socket to be nonblocking, we are telling the kernel "when an I/O operation
+that I request cannot be completed without putting the process to sleep, do not put the
+process to sleep, but return an error instead."
+
+當socket被設為非阻塞IO時, 其實就是告訴內核"當一個IO請求在不讓行程 **sleep** 的情況下便無法完成時, 以回傳錯誤代替讓行程睡眠".
+
+如上圖所示, 可以看到前三次呼叫**recvfrom**時, 資料都還沒準備好, 內核這時候會馬上回傳 **EWOULDBLOCK**.
+
+<br>
+
+✍️ Linux手冊上對EWOULDBLOCK的說明:
+| Error name | Meaning |
+| --- | --- |
+| EAGAIN | Resource temporarily unavailable (may be the same value as EWOULDBLOCK) |
+| EWOULDBLOCK | Operation would block (may be same value as EAGAIN) |
+
+<br>
+
+第4次呼叫**recvfrom**時, 資料準備好了並複製到應用程式緩衝區中, 此時**recvfrom**回傳成功, 程式開始處理回傳的資料.
+像這種程式一直在迴圈當中等待呼叫成功就叫做 **polling**; 它會不斷地去詢問核心資料好了沒, 極為耗費CPU時間.
+
 
 - I/O multiplexing (select and poll)
 
@@ -105,15 +134,6 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 
 
 
-
-
-首先來看一下恐龍本裡面, 對上列4個IO模型的說明:
-
-<br>
-
-![Operating System Concepts 10e - 3.6.2 Synchronization][img#01]
-
-
 <br>
 
 ---
@@ -121,6 +141,7 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 
 ## References
 
+<!-- Images -->
 [img#01]: /images/2019/april/3e9d19e1edb50b83f1c5ff8fffab1113cadaea87c7dd657b3522d0af6cbe4ee7.png "Operating System Concepts 10e - 3.6.2 Synchronization"
 
 [img#02]: /images/2019/april/2d17e41441c8e68ca4a6821001854913e331c54133df21edd496523c6075cd27.png "Blocking I/O model"
@@ -135,7 +156,17 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 
 [img#07]: /images/2019/april/1a308013c3e7b257a863e230ca51b8adc49bda8ef6360181bf97943de914961b.png "Comparison"
 
+<!-- Links -->
+[ref#man-ERRNO(3)]:  "Linux Programmer's Manual - ERRNO(3) / EWOULDBLOCK"
+
 [ref#01]: link "Link description"
+[ref#01]: link "Link description"
+
+<!-- Abbreviations -->
+*[核心]: Kernel
+*[內核]: Kernel
+*[行程]: Process
+*[sleep]: 使process/thread暫停一段時間
 
 
 <br>
@@ -152,7 +183,9 @@ Stevens, R & Fenner, B & Rudoff, A (2003, Nov 21). [UNIX Network Programming Vol
 
 Silberschatz, A & Galvin, P (2018, May 2). [Operating System Concepts 10e](https://www.amazon.com/Operating-System-Concepts-Abridged-Companion/dp/1119456339/ref=sr_1_fkmrnull_1?keywords=Operating+System+Concepts+10e&qid=1554626354&s=books&sr=1-1-fkmrnull). Amazon.
 
+Linux Programmer's Manual (2017, Sep 15). [SLEEP(3)](http://man7.org/linux/man-pages/man3/sleep.3.html) Linux Programmer's Manual.
 
+Linux Programmer's Manual (2017, Mar 06). [ERRNO(3)](http://man7.org/linux/man-pages/man3/errno.3.html) Linux Programmer's Manual.
 
 [Title](href link)
 
