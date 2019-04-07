@@ -1,10 +1,10 @@
-# Apuntes
-
-A place to place notes.
-Trying to find a **60 sec** / **60 min** solution.
-
-
 ---
+home: true
+description: 60 seconds solution, 60 minutes explanation.
+footer: MIT Licensed | Copyright © 2019-present Scott Lin
+---
+
+
 
 ### Index
 
