@@ -307,7 +307,5 @@ huli. (2018). [深入探討 JavaScript 中的參數傳遞：call by value 還是
 
 Wikipedia. (2019). [Evaluation strategy](https://en.wikipedia.org/wiki/Evaluation_strategy). Wikipedia.
 
-Doe, J. (2019). [Book name or reference name](link). StackOverflow.
-
 
 [Title](href link)
