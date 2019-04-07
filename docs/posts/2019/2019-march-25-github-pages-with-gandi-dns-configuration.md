@@ -1,3 +1,12 @@
+---
+title: Github pages佈置靜態網站 + 透過DNS服務換成自訂的網域
+lang: zh-TW
+date: 2019-03-25
+categories: [2019]
+tags: [github, gh-pages, DNS]
+---
+
+
 # Github pages佈置靜態網站 + 透過DNS服務換成自訂的網域
 
 ##### Date: 2019/March/25

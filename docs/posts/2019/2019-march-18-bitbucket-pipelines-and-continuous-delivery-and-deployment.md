@@ -1,3 +1,11 @@
+---
+title: 使用Bitbucket Pipelines 來實做Continuous Delivery / Deployment
+lang: zh-TW
+date: 2019-03-18
+categories: [2019]
+tags: [bitbucket, CI/CD]
+---
+
 # 使用Bitbucket Pipelines 來實做Continuous Delivery / Deployment
 
 ##### Date: 2019/March/18

@@ -1,3 +1,12 @@
+---
+title: 比較 Pass by Value / Reference / Name
+lang: zh-TW
+date: 2019-03-28
+categories: [2019]
+tags: [C, pass-parameters, JAVA, PHP]
+---
+
+
 # 比較 Pass by Value / Reference / Name
 
 ##### Date: 2019/March/28
