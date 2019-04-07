@@ -109,6 +109,9 @@ process to sleep, but return an error instead."
 第4次呼叫**recvfrom**時, 資料準備好了並複製到應用程式緩衝區中, 此時**recvfrom**回傳成功, 程式開始處理回傳的資料.
 像這種程式一直在迴圈當中等待呼叫成功就叫做 **polling**; 它會不斷地去詢問核心資料好了沒, 極為耗費CPU時間.
 
+應用場景可以參考[這一篇][ref#websocket v.s. polling]的介紹.
+
+<br>
 
 - I/O multiplexing (select and poll)
 
@@ -157,9 +160,8 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 [img#07]: /images/2019/april/1a308013c3e7b257a863e230ca51b8adc49bda8ef6360181bf97943de914961b.png "Comparison"
 
 <!-- Links -->
-[ref#man-ERRNO(3)]:  "Linux Programmer's Manual - ERRNO(3) / EWOULDBLOCK"
+[ref#websocket v.s. polling]: https://blog.gtwang.org/web-development/websocket-protocol/ "WebSocket 通訊協定簡介：比較 Polling、Long-Polling 與 Streaming 的運作原理"
 
-[ref#01]: link "Link description"
 [ref#01]: link "Link description"
 
 <!-- Abbreviations -->
@@ -186,6 +188,8 @@ Silberschatz, A & Galvin, P (2018, May 2). [Operating System Concepts 10e](https
 Linux Programmer's Manual (2017, Sep 15). [SLEEP(3)](http://man7.org/linux/man-pages/man3/sleep.3.html) Linux Programmer's Manual.
 
 Linux Programmer's Manual (2017, Mar 06). [ERRNO(3)](http://man7.org/linux/man-pages/man3/errno.3.html) Linux Programmer's Manual.
+
+Wang, G. T. (2014, Jan 16). [WebSocket 通訊協定簡介：比較 Polling、Long-Polling 與 Streaming 的運作原理](https://blog.gtwang.org/web-development/websocket-protocol/) G. T. Wang 的個人部落格
 
 [Title](href link)
 
