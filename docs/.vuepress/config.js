@@ -1,5 +1,5 @@
 module.exports = {
-    title: 'Notes',
+    title: 'Apuntes',
     description: 'Scott Lin\'s notes',
     // base: "/apuntes/",
     head: [
@@ -26,6 +26,14 @@ module.exports = {
 
     markdown: {
         lineNumbers: true
+    },
+
+
+    themeConfig: {
+        lastUpdated: 'Last Updated',
+        serviceWorker: {
+            updatePopup: true
+        }
     },
 
     plugins: [
