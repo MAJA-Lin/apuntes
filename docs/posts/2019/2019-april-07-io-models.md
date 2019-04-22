@@ -117,25 +117,143 @@ process to sleep, but return an error instead."
 
 ![I/O multiplexing (select and poll)][img#04]
 
+在I/O複用裡面, 先使用**select()**將行程停下來, 等候任何一個socket變成可讀之後,
+
+將這個**可讀的socket**回傳回來, 呼叫 **recvfrom()** 複製資料並繼續執行.
+
+與Blocking IO做比較的話, 好像沒什麼優點, 甚至還比Blocking IO多做了一次系統呼叫;
+可是因為它使用了**select()**, 能夠在多個 描述符 裡有任何一個準備就緒時就處理,
+讓它能夠以單一的process/thread處理多個連線.
+
+> SELECT的介紹
+>
+>> **select** function allows the process to instruct the kernel to wait for any one of multiple eventsto occur and to wake up the process only when one or more of these events occurs or when a specified amount of time has passed.
+>
+> **select()** 告訴內核在指定的事件發生時, 再喚醒這個行程並繼續執行.
+>也就是說, 我們能跟內核說我們有興趣的 描述符 (在這個案例裡就是可讀的socket)以及等待的時間.
+>當然, 這些描述符並不僅僅限制於socket.
+
+
+更詳細的解說可以參考[知乎][ref#io multiplexing] 與 [以Redis為範例的I/O Multiplexing詳盡說明][ref#redis and io multiplexing].
 
 - Signal-Driven I/O (SIGIO)
 
 ![Signal driven I/O][img#05]
 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+訊號驅動IO與**SIGIO**關係密切, 可以先到Linux Manual閱讀一下[signal的說明][ref#man SIGNAL]
+
+✍️ Linux手冊上對SIGNAL的說明:
+
+> Term: Default action is to terminate the process.
+
+
+| Signal | Standard | Action | Comment |
+| --- | --- | --- | --- |
+| SIGIO | - | Term | I/O now possible (4.2BSD) |
+| SIGPOLL | P2001 | Term | Pollable event (Sys V). Synonym for SIGIO |
+
+首先使用**sigaction**來建立一個訊號處理器(singal handler), 並馬上返回, 程式可以不被阻擋繼續執行.
+當資料準備好的時候, **SIGIO**訊號便會被拋出.
+
+>Regardless of how we handle the signal, the advantage to this model is that we are not blocked while waiting for the datagram to arrive.
+>The main loop can continue executing andjust wait to be notified by the signal handler that either the data is ready to process or thedatagram is ready to be read.
+
+此時我們可以:
+
+1. 呼叫**recvfrom**從訊號處理器讀取資料, 並通知主迴圈資料準備完成, 可被處理
+2. 通知主迴圈並讓它自己去讀取資料
+
+此模型的優點就是, 不論我們如何處理資料, 在等待資料抵達的過程中, 程式都是不被阻擋的.
+主迴圈可以持續執行並等候訊號通知.
+
+<br>
 
 - Asynchronous I/O (the POSIX aio_functions)
 
 ![Asynchronous I/O][img#06]
 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
+>Asynchronous I/O is defined by the POSIX specification, and various differences in thereal-time functions that appeared in the various standards which came together to form the current POSIX specification have been reconciled.
+>In general, these functions work bytelling the kernel to start the operation and to notify us when the entire operation(including the copy of the data from the kernel to our buffer) is complete. The main difference between this model and the signal-driven I/O model in the previous section is that with signal-driven I/O, the kernel tells us when an I/O operation can be initiated, butwith asynchronous I/O, the kernel tells us when an I/O operation is complete.
+
+大致上來說, asynchoronous告訴內核執行一整個操作(其中也包括了從內核複製資料到緩衝區裡), 並在操作完成之時通知我們.
+
+與signal-driven I/O最大的差別是, signal-driven是內核告訴我們I/O動作可以開始了;
+asynchronous是內核告訴我們I/O已經完成了.
+
+>We call **aio_read** (the POSIX asynchronous I/O functions begin with aio_ or lio_) and pass the kernel the **descriptor**, **buffer pointer**, **buffer size** (the same three arguments for read), **file offset** (similar to lseek), and how to notify us when the entire operation is complete.
+>This system call returns immediately and our process is not blocked while waiting for the I/O to complete. We assume in this example that we ask the kernel togenerate some signal when the operation is complete.
+>This signal is not generated until the data has been copied into our application buffer, which is different from the signal-driven I/O model.
+
+我們呼叫**aio_read()**, 並且傳入descriptor, buffer pointer, buffer size(也就是[read][ref#man read]的三個參數), file offset (與[lseek][ref#man lseek]參數一致), 以及當操作完成時該如何通知.
+在這邊我們假設操作完成時, 內核會回傳一個訊號. 此訊號直到資料被複製進入應用程式的緩衝區以後才會被送出.
+
+---
+
+傳給**aio_read()**的參數可以參考[Linux manual][ref#man AIO_READ].
+
+✍️ Linux手冊上對AIO_READ的說明:
+
+```c
+#include <aio.h>
+
+int aio_read(struct aiocb *aiocbp);
+```
+
+可以注意到AIO_READ接收的參數是一個結構, 在繼續查下去可以看到[AIO的頁面上][ref#man AIO]有這個結構的原始碼
+
+```c
+#include <aiocb.h>
+struct aiocb {
+    /* The order of these fields is implementation-dependent */
+
+    int             aio_fildes;     /* File descriptor */
+    off_t           aio_offset;     /* File offset */
+    volatile void  *aio_buf;        /* Location of buffer */
+    size_t          aio_nbytes;     /* Length of transfer */
+    int             aio_reqprio;    /* Request priority */
+    struct sigevent aio_sigevent;   /* Notification method */
+    int             aio_lio_opcode; /* Operation to be performed;
+                                        lio_listio() only */
+
+    /* Various implementation-internal fields not shown */
+};
+
+/* Operation codes for 'aio_lio_opcode': */
+
+enum { LIO_READ, LIO_WRITE, LIO_NOP };
+```
+
+參數詳細說明:
+
+![Description][img#08]
+
+
+<br>
+
+---
 
 一次5種IO模型的比較
 
 ![comparison][img#07]
 
+#### Synchronous I/O v.s. Asynchronous I/O
 
+>POSIX defines these two terms as follows:
+> - A synchronous I/O operation causes the requesting process to be blocked until that I/O operation completes.
+> - An asynchronous I/O operation does not cause the requesting process to be blocked.
+>
+> Using these definitions, the first four I/O models **blocking**, **nonblocking**, **I/O multiplexing**,and **signal-driven I/O** are all synchronous because the actual I/O operation (recvfrom) blocks the process.
+> Only the asynchronous I/O model matches the asynchronous I/O definition.
+
+根據POSIX的定義, 最大的差異就是在於**IO operation**到底會不會讓請求被阻擋:
+
+- 同步IO操作會導致請求的程序在IO操作完成之前都被阻擋住.
+- 異步IO操作則不會造成請求程序被堵住.
+
+可以搭配這張圖片服用:
+
+![Sync v.s. Async][img#09]
 
 <br>
 
@@ -159,16 +277,34 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 
 [img#07]: /images/2019/april/1a308013c3e7b257a863e230ca51b8adc49bda8ef6360181bf97943de914961b.png "Comparison"
 
+[img#08]: /images/2019/april/f2a5572f5c2371b722300ffaa1b25d1a866b96bf34b93b97825de0721c482115.png "aio structure description"
+
+[img#09]: /images/2019/april/21804deb7a6be5de0debaddd9440b81b742706639901b1d1bea51c2cda3d6145.png "OS: Two I/O methods: (a) synchronous and (b) asynchronous"
+
 <!-- Links -->
 [ref#websocket v.s. polling]: https://blog.gtwang.org/web-development/websocket-protocol/ "WebSocket 通訊協定簡介：比較 Polling、Long-Polling 與 Streaming 的運作原理"
 
-[ref#01]: link "Link description"
+[ref#io multiplexing]: https://www.zhihu.com/question/28594409 "知乎 - I/O多路复用技术（multiplexing）是什么？"
+
+[ref#redis and io multiplexing]: https://draveness.me/redis-io-multiplexing "Redis 和 I/O 多路复用"
+
+[ref#man SIGNAL]: http://man7.org/linux/man-pages/man7/signal.7.html "Linux Programmer's Manual SIGNAL(7)"
+
+[ref#man AIO_READ]: http://man7.org/linux/man-pages/man3/aio_read.3.html "Linux Programmer's Manual AIO_READ(3)"
+
+[ref#man AIO]: http://man7.org/linux/man-pages/man7/aio.7.html "Linux Programmer's Manual AIO(7)"
+
+[ref#man read]: http://man7.org/linux/man-pages/man2/read.2.html "Linux Programmer's Manual READ(2)"
+
+[ref#man lseek]: http://man7.org/linux/man-pages/man2/lseek.2.html "Linux Programmer's Manual LSEEK(2)"
+
 
 <!-- Abbreviations -->
 *[核心]: Kernel
 *[內核]: Kernel
 *[行程]: Process
 *[sleep]: 使process/thread暫停一段時間
+*[描述符]: descriptors
 
 
 <br>
@@ -178,6 +314,10 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 Carl. (2018, Jan 31). [淺談I/O Model](https://medium.com/@clu1022/%E6%B7%BA%E8%AB%87i-o-model-32da09c619e6). Medium.
 
 xianyunyh. (2018, Dec 29). [PHP-Interview - LinuxIO模型.md](https://github.com/xianyunyh/PHP-Interview/blob/master/Linux/LinuxIO%E6%A8%A1%E5%9E%8B.md). xianyunyh/PHP-Interview.
+
+findumars (2017, Feb 02). [5种网络IO模型（有图，很清楚）](https://www.cnblogs.com/findumars/p/6361627.html) 博客园.
+
+二毛儿 (2019, Jan 10). [5种网络IO模型（有图，很清楚）(備份)](https://zhuanlan.zhihu.com/p/54580385) 知乎.
 
 calidion. (2016, Jul 8). [同步，异步，阻塞，非阻塞等关系轻松理解 #40](https://github.com/calidion/calidion.github.io/issues/40). calidion/calidion.github.io.
 
@@ -191,5 +331,6 @@ Linux Programmer's Manual (2017, Mar 06). [ERRNO(3)](http://man7.org/linux/man-p
 
 Wang, G. T. (2014, Jan 16). [WebSocket 通訊協定簡介：比較 Polling、Long-Polling 與 Streaming 的運作原理](https://blog.gtwang.org/web-development/websocket-protocol/) G. T. Wang 的個人部落格
 
-[Title](href link)
+知乎用户 (2015, Jun 27). [知乎 - I/O多路复用技术（multiplexing）是什么？](https://www.zhihu.com/question/28594409) 知乎
 
+Draveness (2016, Nov 26). [Redis 和 I/O 多路复用](https://draveness.me/redis-io-multiplexing) Draveness's Blog
