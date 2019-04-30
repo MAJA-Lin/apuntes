@@ -8,6 +8,8 @@ footer: MIT Licensed | Copyright © 2019-present Scott Lin
 
 ### Index
 
+[2019/April/29 - Static v.s. Self in PHP][article#2019-april-29]
+
 [2019/April/15 - Float Precision][article#2019-april-15]
 
 [2019/April/07 - I/O Models][article#2019-april-07-io-models]
@@ -40,3 +42,5 @@ footer: MIT Licensed | Copyright © 2019-present Scott Lin
 [article#2019-april-07-io-models]: /posts/2019/2019-april-07-io-models.md
 
 [article#2019-april-15]: /posts/2019/2019-april-15-float-precision.md
+
+[article#2019-april-29]: /posts/2019/2019-april-29-static-vs-self-in-php.md
