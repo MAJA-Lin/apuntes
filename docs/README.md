@@ -8,6 +8,8 @@ footer: MIT Licensed | Copyright © 2019-present Scott Lin
 
 ### Index
 
+[2019/November/28 - HTTP 123][article#2019-nov-28]
+
 [2019/April/29 - Static v.s. Self in PHP][article#2019-april-29]
 
 [2019/April/15 - Float Precision][article#2019-april-15]
@@ -44,3 +46,5 @@ footer: MIT Licensed | Copyright © 2019-present Scott Lin
 [article#2019-april-15]: /posts/2019/2019-april-15-float-precision.md
 
 [article#2019-april-29]: /posts/2019/2019-april-29-static-vs-self-in-php.md
+
+[article#2019-nov-28]: /posts/2019/2019-nov-28-http-123.md
