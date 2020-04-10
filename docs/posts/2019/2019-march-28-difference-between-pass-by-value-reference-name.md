@@ -3,7 +3,7 @@ title: 比較 Pass by Value / Reference / Name
 lang: zh-TW
 date: 2019-03-28
 categories: [2019]
-tags: [C, pass-parameters, JAVA, PHP]
+tags: [C, pass-parameters, JAVA, PHP, Scala]
 ---
 
 
@@ -141,6 +141,21 @@ func main() {
 9
 ---
 10
+```
+
+##### Runnable sample in Scala
+
+```scala
+def foo(input: => Int, cond: => Boolean) = {
+  while (cond) {
+    println(i)
+    i += 1
+  }
+}
+
+
+var i = 5
+foo(i, i < 10)
 ```
 
 
