@@ -46,6 +46,14 @@ module.exports = {
     },
 
     plugins: [
-        ['@vuepress/back-to-top']
+        ['@vuepress/back-to-top'],
+        [
+            '@vuepress/medium-zoom', {
+                options: {
+                    margin: 16,
+                    background: '#262928'
+                }
+            }
+        ]
     ]
 }
