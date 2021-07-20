@@ -4,7 +4,7 @@ description: 60 seconds solution, 60 minutes explanation.
 footer: MIT Licensed | Copyright © 2019-present Scott Lin
 ---
 
-
+### [Apuntes](https://apuntes.majaja.org)
 
 ### Index
 
