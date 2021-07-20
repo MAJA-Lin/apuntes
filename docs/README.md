@@ -8,6 +8,8 @@ footer: MIT Licensed | Copyright © 2019-present Scott Lin
 
 ### Index
 
+[2021/July/21 - Migrate Continuous Integration From Travis CI to GitHub Action][article#2021-jul-21]
+
 [2019/November/28 - HTTP 123][article#2019-nov-28]
 
 [2019/April/29 - Static v.s. Self in PHP][article#2019-april-29]
@@ -48,3 +50,5 @@ footer: MIT Licensed | Copyright © 2019-present Scott Lin
 [article#2019-april-29]: /posts/2019/2019-april-29-static-vs-self-in-php.md
 
 [article#2019-nov-28]: /posts/2019/2019-nov-28-http-123.md
+
+[article#2021-jul-21]: /posts/2021/2021-jul-21-migrate-ci-from-travis-to-github-action.md
