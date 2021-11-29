@@ -8,6 +8,8 @@ footer: MIT Licensed | Copyright © 2019-present Scott Lin
 
 ### Index
 
+[2021/November/29 - Laravel Config, Drivers and Managers][article#2021-nov-29]
+
 [2021/July/21 - Migrate Continuous Integration From Travis CI to GitHub Action][article#2021-jul-21]
 
 [2019/November/28 - HTTP 123][article#2019-nov-28]
@@ -52,3 +54,5 @@ footer: MIT Licensed | Copyright © 2019-present Scott Lin
 [article#2019-nov-28]: /posts/2019/2019-nov-28-http-123.md
 
 [article#2021-jul-21]: /posts/2021/2021-jul-21-migrate-ci-from-travis-to-github-action.md
+
+[article#2021-nov-29]: /posts/2021/2021-nov-29-laravel-config-drivers-and-managers.md
