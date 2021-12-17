@@ -7,7 +7,9 @@
     "@vuepress/plugin-back-to-top": "^1.8.2",
     "@vuepress/plugin-medium-zoom": "^1.8.2",
     "markdown-it-abbr": "^1.0.4",
-    "vuepress": "^1.8.2"
+    "vuepress": "^1.8.2",
+    "nth-check": ">=2.0.1",
+    "glob-parent": ">=5.1.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
